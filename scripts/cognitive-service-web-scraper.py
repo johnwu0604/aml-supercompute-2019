@@ -28,10 +28,8 @@ parser.add_argument('--root_dir', type=str, help='Root directory to store photos
 parser.add_argument('--image_dim', type=str, help='Image dimensions')
 args = parser.parse_args()
 
-# root_dir = args.root_dir
-# image_dim = int(args.image_dim)
-root_dir = 'data'
-image_dim = 512
+root_dir = args.root_dir
+image_dim = int(args.image_dim)
 train_dir = os.path.join(root_dir, 'train')
 valid_dir = os.path.join(root_dir, 'valid')
 
