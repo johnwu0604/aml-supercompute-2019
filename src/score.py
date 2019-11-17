@@ -1,13 +1,13 @@
 from tensorflow.keras.models import load_model
-from azureml.core import Model
 import numpy as np
 import os
 import cv2
 import json
 
 def init():
+	model_dir = 'outputs'
 	global model 
-	model = load_model(os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'model.h5'))
+	model = load_model(os.path.join(model_dir, 'model.h5'))
 
 def run(raw_data):
 	image_dim = 250
