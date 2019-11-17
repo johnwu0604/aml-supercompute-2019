@@ -24,14 +24,7 @@ def run(raw_data):
 	image = cv2.resize(image, (image_dim, image_dim))
 	image = np.float32(image)
 	pred = model.predict([[image]])
+	print(pred)
 	return pred
-
-init()
-
-result = run(json.dumps({
-	'image_url': 'test/lebron.jpg'
-}))
-
-print(result)
 
 

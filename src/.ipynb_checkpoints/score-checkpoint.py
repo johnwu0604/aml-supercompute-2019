@@ -14,7 +14,7 @@ def run(raw_data):
 	image_url = json.loads(raw_data)['image_url']
 	face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 	image = cv2.imread(image_url)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	detected_face = face_classifier.detectMultiScale(image, scaleFactor=1.1, minNeighbors=1, minSize=(1,1))
 	x = detected_face[0][0]
 	y = detected_face[0][1]
@@ -24,14 +24,7 @@ def run(raw_data):
 	image = cv2.resize(image, (image_dim, image_dim))
 	image = np.float32(image)
 	pred = model.predict([[image]])
+	print(pred)
 	return pred
-
-init()
-
-result = run(json.dumps({
-	'image_url': 'test/lebron.jpg'
-}))
-
-print(result)
 
 
