@@ -98,7 +98,7 @@ model.fit_generator(train_generator,
                     epochs=num_epochs,
                     validation_data=valid_generator, 
                     validation_steps=10,
-                    callbacks=[AmlLogger()]
+                    callbacks=[AmlLogger()],
                     verbose=1)
 
 # Save the output model
