@@ -30,7 +30,7 @@ class AmlLogger(Callback):
 parser = argparse.ArgumentParser(description='Famous athlete classifier')
 parser.add_argument('--data_dir', type=str, default='data', help='Root directory of the data')
 parser.add_argument('--image_dim', type=int, default=250, help='Image dimensions')
-parser.add_argument('--learning_rate', type=float, default=0.001, help='Learnign rate of the optimizer')
+parser.add_argument('--learning_rate', type=float, default=0.001, help='Learning rate of the optimizer')
 parser.add_argument('--batch_size', type=int, default=16, help='Training batch size')
 parser.add_argument('--steps_per_epoch', type=int, default=100, help='Training steps per epoch')
 parser.add_argument('--num_epochs', type=int, default=25, help='Training number of epochs')
@@ -42,6 +42,7 @@ args = parser.parse_args()
 # Get arguments from parser
 data_dir = args.data_dir
 image_dim = args.image_dim
+learning_rate = args.learning_rate
 batch_size = args.batch_size 
 steps_per_epoch = args.steps_per_epoch 
 num_epochs = args.num_epochs 
