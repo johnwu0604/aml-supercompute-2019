@@ -1,4 +1,3 @@
-# +
 import os
 import requests
 import argparse
@@ -20,36 +19,40 @@ def time_limit(seconds):
     finally:
         signal.alarm(0)
 
-
-# -
-
+# Define arguments
 parser = argparse.ArgumentParser(description='Web scraping arg parser')
 parser.add_argument('--root_dir', type=str, help='Root directory to store photos')
-parser.add_argument('--image_dim', type=str, help='Image dimensions')
+parser.add_argument('--image_dim', type=int, help='Image dimensions')
+parser.add_argument('--api_key', type=str, help='Image dimensions')
 args = parser.parse_args()
 
+# Get arguments from parser
 root_dir = args.root_dir
-image_dim = int(args.image_dim)
+image_dim = args.image_dim
+api_key = args.api_key
+
+# Create train and valid directories
 train_dir = os.path.join(root_dir, 'train')
 valid_dir = os.path.join(root_dir, 'valid')
 
-# +
 if not os.path.exists(train_dir):
     os.makedirs(train_dir)
     
 if not os.path.exists(valid_dir):
     os.makedirs(valid_dir)
-# -
 
+# Set search headers and URL
 headers = requests.utils.default_headers()
 headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
 
-subscription_key = '63b11f32293f4f73bb805bd7f88e093e'
+subscription_key = api_key
 search_url = 'https://eastus.api.cognitive.microsoft.com/bing/v7.0/images/search'
 
+# Define number of images and number of labels
 num_images = 500
 search_terms = ['Lebron James', 'Stephen Curry']
 
+# Make query for each athlete and download images
 for search in search_terms:
     
     class_name = search.replace(' ','_')
@@ -99,6 +102,7 @@ for search in search_terms:
                 except:
                     print('Skipping {} due to download error:'.format(filename))
 
+# Crop faces from image using OpenCV
 face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 for file in list(paths.list_images(root_dir)):
     try:
