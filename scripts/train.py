@@ -13,7 +13,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 # Get the Azure ML run object
 run = Run.get_context()
 
-
 class AmlLogger(Callback):
     ''' A callback class for logging metrics using Azure Machine Learning Python SDK '''
 

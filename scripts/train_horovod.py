@@ -16,7 +16,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 # Get the Azure ML run object
 run = Run.get_context()
 
-
 class AmlLogger(Callback):
     ''' A callback class for logging metrics using Azure Machine Learning Python SDK '''
 
@@ -110,7 +109,7 @@ optimizer = hvd.DistributedOptimizer(optimizer)
 # Compile model with optimizer, loss function, and metrics
 model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'], experimental_run_tf_function=False)
 
-# +
+# Horovod: add callbacks
 callbacks = [
     # Horovod: broadcast initial variable states from rank 0 to all other processes.
     # This is necessary to ensure consistent initialization of all workers when
@@ -135,7 +134,6 @@ if hvd.rank() == 0:
 
 # Horovod: write logs on worker 0.
 verbose = 1 if hvd.rank() == 0 else 0
-# -
 
 # Train the model
 model.fit_generator(train_generator, 
@@ -143,7 +141,7 @@ model.fit_generator(train_generator,
                     epochs=num_epochs,
                     validation_data=valid_generator, 
                     validation_steps=10,
-                    callbacks=callbacks
+                    callbacks=callbacks,
                     verbose=verbose)
 
 # Save the output model
