@@ -103,7 +103,7 @@ for search in search_terms:
                     print('Skipping {} due to download error:'.format(filename))
 
 # Crop faces from image using OpenCV
-face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_classifier = cv2.CascadeClassifier('src/haarcascade_frontalface_default.xml')
 for file in list(paths.list_images(root_dir)):
     try:
         image = cv2.imread(file)
