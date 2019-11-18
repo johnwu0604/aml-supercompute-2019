@@ -37,7 +37,7 @@ valid_dir = os.path.join(root_dir, 'valid')
 
 if not os.path.exists(train_dir):
     os.makedirs(train_dir)
-    
+
 if not os.path.exists(valid_dir):
     os.makedirs(valid_dir)
 
